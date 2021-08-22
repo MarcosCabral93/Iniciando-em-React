@@ -1,39 +1,58 @@
 import React, { Component } from 'react';
-import Button from './componentes/Button';
-import imgd from './assets/images/biscoito.png'
+import imgd from './assets/images/cronometro.png'
 import './style.css'
 
 class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            mensagem: ''
+
+            cronometro: 0,
+            botao:"start"
         };
-
-        this.quebraBiscoito = this.quebraBiscoito.bind(this);
-
-        this.frases = ['Siga os bons e aprenda com eles.', 'O bom-senso vale mais do que muito conhecimento.', 
- 'O riso é a menor distância entre duas pessoas.', 
- 'Deixe de lado as preocupações e seja feliz.',
- 'Realize o óbvio, pense no improvável e conquiste o impossível.',
- 'Acredite em milagres, mas não dependa deles.',
- 'A maior barreira para o sucesso é o medo do fracasso.'];
-
+        this.temporizador=null
+        this.iniciar=this.iniciar.bind(this)
+        this.finalizar=this.finalizar.bind(this)
+    } 
+    iniciar(){
+        let state=this.state
+        if(this.temporizador!=null){
+            clearInterval(this.temporizador)
+            this.temporizador=null
+           state.botao="start"
+         }else{
+            //renderiza a cada 1 milisguno
+            this.temporizador=setInterval(()=>{
+                let state=this.state
+                state.cronometro+=0.1
+                this.setState(state)
+            },100)
+            state.botao="pausar"
+        }
+        
     }
-quebraBiscoito(){
-    let state=this.state
-    let nAleatorio=Math.floor(Math.random()* this.frases.length)
-    state.mensagem=this.frases[nAleatorio]
-    this.setState(state)
-}
 
+    finalizar(){
+        if(this.temporizador!=null){
+            clearInterval(this.temporizador)
+            this.temporizador=null}
+        let state=this.state
+        state.botao="start"
+        state.cronometro=0
+        this.setState(state)
+    }
     render() { 
         return (
             <div className="container">
-                <h1>Biscoito premiado</h1>
-                <img src={imgd} alt=" " className="imagem"/>
-               <Button className='btn' onc={this.quebraBiscoito}/>
-               <h3 className='texto'>{this.state.mensagem}</h3>
+               <div>
+                   <h1 className="titulo">Cronometrando com React</h1>
+                   <img src={imgd} alt="cronometro" className="imagem" />
+                   <h2 className="texto">{this.state.cronometro.toFixed(1)}</h2>
+               </div>
+                <div> 
+                    <button onClick={this.iniciar}>{this.state.botao}</button>
+                    <button onClick={this.finalizar}>Zerar</button>
+                </div>
             </div>   
         );
     }

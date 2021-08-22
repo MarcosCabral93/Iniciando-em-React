@@ -5,12 +5,35 @@
     flex-direction: column;
 }
 .imagem{
-    margin: 10px;
-    max-width: 250px;
-    max-height: 250px;
+    margin: auto;
+   ;
+     
 }
 .texto{
-    font-style: italic;
+    text-align: center;
     color: rgb(64, 64, 151);
-    margin-top: 20px;
+    margin-top:-250px;
+}
+button{
+    background: #0066A2;
+
+color: white;
+
+border-style: outset;
+
+border-color: #0066A2;
+
+height: 50px;
+
+width: 100px;
+
+font: bold 15px arial, sans-serif;
+
+text-shadow:none;
+margin: 10px;
+}
+.titulo{
+    font-weight: bold;
+    color: blue;
+    margin: 20px;
 }

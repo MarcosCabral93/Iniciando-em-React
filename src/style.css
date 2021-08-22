@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.imagem{
+    margin: 10px;
+    max-width: 250px;
+    max-height: 250px;
+}
+.texto{
+    font-style: italic;
+    color: rgb(64, 64, 151);
+    margin-top: 20px;
+}

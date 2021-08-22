@@ -1,42 +1,42 @@
-import React, { Component } from 'react'
-
-
+import React, { Component } from 'react';
+import Button from './componentes/Button';
+import imgd from './assets/images/biscoito.png'
+import './style.css'
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state={
-      form:{
-      email: "",
-      senha: "",
-      sexo: ""
-    }}
-    this.trocaForm=this.trocaForm.bind(this)
-    
-  }
-    //o name dos inputs tem que ser o mesmo do state
-    trocaForm(e){
-        let form=this.state.form;
-        form[e.target.name]= e.target.value
-        this.setState({form:form})
-          }
+    constructor(props){
+        super(props);
+        this.state = {
+            mensagem: ''
+        };
+
+        this.quebraBiscoito = this.quebraBiscoito.bind(this);
+
+        this.frases = ['Siga os bons e aprenda com eles.', 'O bom-senso vale mais do que muito conhecimento.', 
+ 'O riso é a menor distância entre duas pessoas.', 
+ 'Deixe de lado as preocupações e seja feliz.',
+ 'Realize o óbvio, pense no improvável e conquiste o impossível.',
+ 'Acredite em milagres, mas não dependa deles.',
+ 'A maior barreira para o sucesso é o medo do fracasso.'];
+
+    }
+quebraBiscoito(){
+    let state=this.state
+    let nAleatorio=Math.floor(Math.random()* this.frases.length)
+    state.mensagem=this.frases[nAleatorio]
+    this.setState(state)
+}
+
     render() { 
         return (
-            
-          <div>
-           <input type="email" name="email" value={this.state.form.email}
-            onChange={this.trocaForm}/>
-           <input type="password" name="senha" value={this.state.form.senha}
-            onChange={this.trocaForm}/>
-            <select  name="sexo" value={this.state.form.sexo} onChange={this.trocaForm} >
-              <option value="Masculino">Masculino</option>
-              <option value="Feminino">Feminino</option>
-            </select>
-            <h3>{this.state.form.email}</h3>
-            <h3>{this.state.form.senha}</h3>
-            <h3>{this.state.form.sexo}</h3>
-          </div>
-        )}
+            <div className="container">
+                <h1>Biscoito premiado</h1>
+                <img src={imgd} alt=" " className="imagem"/>
+               <Button className='btn' onc={this.quebraBiscoito}/>
+               <h3 className='texto'>{this.state.mensagem}</h3>
+            </div>   
+        );
+    }
 }
  
-export default App
+export default App ;
